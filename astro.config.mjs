@@ -18,8 +18,8 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   
-  // 填入你现在的测试网址，等要绑定独立域名时再改成 peiyucai.com
-  site: 'https://my-academic-site.cpyexp.workers.dev', 
+  // 站点信息
+  site: 'https://peiyucai.com', 
   
   // 根路径
   base: '/', 

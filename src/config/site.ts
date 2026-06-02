@@ -19,8 +19,8 @@ export const THEME_CONFIG: ThemeConfig = {
 
 export const SETTINGS: SettingsConfig = {
     showTagsInNavbar: true,
-    showRSSInFooter: true,
-    addDevToolsInProduction: true,
+    showRSSInFooter: false,
+    addDevToolsInProduction: false,
 };
 
 const umami: UmamiAnalyticsConfig = {
