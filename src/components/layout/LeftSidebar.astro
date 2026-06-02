@@ -7,13 +7,18 @@ import { Image } from 'astro:assets';
 const activeSocials = SOCIALS.filter((s) => s.isActive);
 const bioCollection = await getCollection("bio");
 const bio = bioCollection[0]?.data;
+const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+const avatarPath = bio?.avatar?.replace(/^\//, "");
+const avatarSrc = avatarPath ? `${baseUrl}${avatarPath}` : undefined;
 ---
 
 <aside class="sidebar max-lg:flex-row max-lg:flex-wrap max-lg:gap-3 max-md:gap-2">
     <div class="flex flex-col items-center text-center max-lg:flex-row max-lg:text-left max-lg:gap-3 max-lg:items-center max-md:gap-2">
-        {bio?.avatar && (
+        {avatarSrc && (
             <Image
-                src={`/${bio.avatar}`}
+                src={avatarSrc}
                 alt={`Avatar of ${bio.name}`}
                 width={160} /* Maximum width in global.css for sidebar-avatar class */
                 height={160}

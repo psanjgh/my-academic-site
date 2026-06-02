@@ -22,6 +22,11 @@ const sortedEntries = entries.sort((a: any, b: any) => {
     const dateB = b.data.date ? new Date(b.data.date).getTime() : 0;
     return dateB - dateA;
 });
+const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+const basePath = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
+const toBaseHref = (href: string) => (href === "/" ? baseUrl : `${basePath}${href}`);
 ---
 
 <BaseLayout title={title}>
@@ -35,7 +40,7 @@ const sortedEntries = entries.sort((a: any, b: any) => {
     <section class="item-list">
         {sortedEntries.map((entry: any) => {
             const item = getListingItem(entry);
-            return <BaseItemCard {...item} href={`/${collection}/${entry.id}`} />;
+            return <BaseItemCard {...item} href={toBaseHref(`/${collection}/${entry.id}`)} />;
         })}
     </section>
 

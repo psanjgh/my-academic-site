@@ -22,6 +22,14 @@ const themeDarkKey = (THEME_CONFIG.themeDark.startsWith('dark_') ? THEME_CONFIG.
 
 const themeLight = THEMES[themeLightKey] || THEMES.light_default;
 const themeDark = THEMES[themeDarkKey] || THEMES.dark_default;
+const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+const basePath = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
+const toBaseHref = (href: string) => (href === "/" ? baseUrl : `${basePath}${href}`);
+const faviconHref = SITE.favicon.startsWith("http")
+    ? SITE.favicon
+    : `${baseUrl}${SITE.favicon.replace(/^\//, "")}`;
 ---
 
 <!doctype html>
@@ -29,8 +37,7 @@ const themeDark = THEMES[themeDarkKey] || THEMES.dark_default;
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href={SITE.favicon} />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/svg+xml" href={faviconHref} />
         <title>{title} | Dev Tools</title>
         <meta name="description" content={description || "Development internal tools."} />
         <meta name="robots" content="noindex, nofollow" />
@@ -114,9 +121,9 @@ const themeDark = THEMES[themeDarkKey] || THEMES.dark_default;
                     {description && <p class="text-lg opacity-60 mt-2">{description}</p>}
                 </div>
                 <div class="flex gap-4 items-center">
-                    <a href="/dev-tools" class="font-semibold text-sm transition-colors duration-200 hover:text-accent">Dev Tools Menu</a>
+                    <a href={toBaseHref("/dev-tools")} class="font-semibold text-sm transition-colors duration-200 hover:text-accent">Dev Tools Menu</a>
                     <span class="opacity-30">|</span>
-                    <a href="/" class="font-semibold text-sm transition-colors duration-200 hover:text-accent">Live Site &rarr;</a>
+                    <a href={toBaseHref("/")} class="font-semibold text-sm transition-colors duration-200 hover:text-accent">Live Site &rarr;</a>
                 </div>
             </header>
 

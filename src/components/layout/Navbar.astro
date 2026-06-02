@@ -1,7 +1,15 @@
 ---
 import { NAV_LINKS, PAGES } from "../../config";
 
+const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+const basePath = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
 const currentPath = Astro.url.pathname;
+const normalizedPath = currentPath.startsWith(basePath)
+    ? currentPath.slice(basePath.length) || "/"
+    : currentPath;
+const toBaseHref = (href: string) => (href === "/" ? baseUrl : `${basePath}${href}`);
 ---
 
 <nav class="navbar">
@@ -17,11 +25,11 @@ const currentPath = Astro.url.pathname;
             }).map((link) => (
                 <li>
                     <a
-                        href={link.href}
+                        href={toBaseHref(link.href)}
                         class={`nav-link ${
-                            currentPath === link.href ||
+                            normalizedPath === link.href ||
                             (link.href !== "/" &&
-                                currentPath.startsWith(link.href))
+                                normalizedPath.startsWith(link.href))
                                 ? "active"
                                 : "inactive"
                         }`}
