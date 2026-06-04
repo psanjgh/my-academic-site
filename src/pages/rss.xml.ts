@@ -9,13 +9,13 @@ export async function GET(context: any) {
     const items = [
         ...posts.map((post: any) => ({
             title: post.data.title,
-            pubDate: post.data.date,
+            pubDate: post.data.date ? new Date(post.data.date) : new Date(),
             description: post.data.description,
             link: `/posts/${post.id}/`,
         })),
         ...publications.map((pub: any) => ({
             title: `[Publication] ${pub.data.title}`,
-            pubDate: pub.data.date,
+            pubDate: pub.data.date ? new Date(pub.data.date) : new Date(),
             description: pub.data.description || `Published in ${pub.data.journal || 'Journal'}`,
             link: `/publications/${pub.id}/`,
         })),

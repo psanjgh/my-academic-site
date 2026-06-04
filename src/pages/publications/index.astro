@@ -1,6 +1,6 @@
 ---
 import BaseListing from "../../layouts/BaseListing.astro";
-import { PAGES } from "../../config";
+import { PAGES, PAGES_ZH } from "../../config";
 
 if (PAGES.publications.isActive === false) {
     return Astro.redirect("/404");
@@ -11,4 +11,6 @@ if (PAGES.publications.isActive === false) {
     collection="publications"
     title={PAGES.publications.title}
     subtitle={PAGES.publications.subtitle}
+    titleZh={PAGES_ZH.publications?.title}
+    subtitleZh={PAGES_ZH.publications?.subtitle}
 />

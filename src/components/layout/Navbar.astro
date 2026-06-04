@@ -1,12 +1,25 @@
 ---
 import { NAV_LINKS, PAGES } from "../../config";
-import { getBaseUrl, getBasePath, toBaseHref } from "../../utils/url";
+import { getBasePath, toBaseHref } from "../../utils/url";
+import { UI } from "../../i18n/translations";
 
 const currentPath = Astro.url.pathname;
 const basePath = getBasePath();
 const normalizedPath = currentPath.startsWith(basePath)
     ? currentPath.slice(basePath.length) || "/"
     : currentPath;
+
+// Route → i18n key mapping (shared with i18n/translations.ts UI dictionary)
+const routeToKey: Record<string, string> = {
+    "/": "nav.about",
+    "/publications": "nav.publications",
+    "/talks": "nav.talks",
+    "/teaching": "nav.teaching",
+    "/projects": "nav.projects",
+    "/posts": "nav.posts",
+    "/tags": "nav.tags",
+    "/cv": "nav.cv",
+};
 ---
 
 <nav class="navbar">
@@ -19,23 +32,30 @@ const normalizedPath = currentPath.startsWith(basePath)
                     : link.href.split("/").filter(Boolean)[0];
                 const pageConfig = (PAGES as any)[pageKey];
                 return link.isActive !== false && pageConfig?.active !== false;
-            }).map((link) => (
-                <li>
-                    <a
-                        href={toBaseHref(link.href)}
-                        class={`nav-link ${
-                            normalizedPath === link.href ||
-                            (link.href !== "/" &&
-                                normalizedPath.startsWith(link.href))
-                                ? "active"
-                                : "inactive"
-                        }`}
-                    >
-                        {link.label}
-                        <span class="nav-link-line" />
-                    </a>
-                </li>
-            ))
+            }).map((link) => {
+                const i18nKey = routeToKey[link.href];
+                const translations = i18nKey
+                    ? (UI as any)[i18nKey]
+                    : { en: link.label, zh: link.label };
+                return (
+                    <li>
+                        <a
+                            href={toBaseHref(link.href)}
+                            class={`nav-link ${
+                                normalizedPath === link.href ||
+                                (link.href !== "/" &&
+                                    normalizedPath.startsWith(link.href))
+                                    ? "active"
+                                    : "inactive"
+                            }`}
+                        >
+                            <span class="lang-en">{translations.en}</span>
+                            <span class="lang-zh">{translations.zh}</span>
+                            <span class="nav-link-line" />
+                        </a>
+                    </li>
+                );
+            })
         }
     </ul>
 </nav>

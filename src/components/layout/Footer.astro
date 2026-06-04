@@ -22,6 +22,14 @@ const showDevTools = import.meta.env.DEV || SETTINGS.addDevToolsInProduction;
                 class="link">Academic Portfolio Astro</a
             ></span
         >
+        <button
+            id="lang-toggle"
+            aria-label="语言 / Language"
+            class="btn-icon"
+        >
+            <span class="lang-en" style="font-size:0.7rem;font-weight:700;width:20px;text-align:center">中</span>
+            <span class="lang-zh" style="font-size:0.7rem;font-weight:700;width:20px;text-align:center">EN</span>
+        </button>
         {
             showRSS && (
                 <a

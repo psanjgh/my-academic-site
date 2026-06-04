@@ -1,11 +1,33 @@
 import { getCollection } from 'astro:content';
+import { PAGES } from '../config';
+
+async function getActiveCollections() {
+    const collections: Record<string, any[]> = {};
+    const map: Record<string, keyof typeof PAGES> = {
+        publications: 'publications',
+        talks: 'talks',
+        projects: 'projects',
+        posts: 'blog',
+        teaching: 'teaching',
+    };
+
+    for (const [col, pageKey] of Object.entries(map)) {
+        if ((PAGES as any)[pageKey]?.isActive !== false) {
+            try {
+                collections[col] = await getCollection(col as any);
+            } catch {
+                collections[col] = [];
+            }
+        } else {
+            collections[col] = [];
+        }
+    }
+    return collections;
+}
 
 export async function getAllTags() {
-    const publications = await getCollection('publications');
-    const talks = await getCollection('talks');
-    const projects = await getCollection('projects');
-    const posts = await getCollection('posts');
-    const teaching = await getCollection('teaching');
+    const { publications, talks, projects, posts, teaching }
+        = await getActiveCollections();
 
     const allEntries = [...publications, ...talks, ...projects, ...posts, ...teaching];
     const tags: Record<string, number> = {};
@@ -28,11 +50,8 @@ export async function getAllTags() {
 export async function getContentByTag(tag: string) {
     const normalizedSearchTag = tag.toLowerCase();
 
-    const publications = await getCollection('publications');
-    const talks = await getCollection('talks');
-    const projects = await getCollection('projects');
-    const posts = await getCollection('posts');
-    const teaching = await getCollection('teaching');
+    const { publications, talks, projects, posts, teaching }
+        = await getActiveCollections();
 
     const filterFn = (entry: any) => {
         const entryTags = (entry.data as any).tags || [];

@@ -11,6 +11,7 @@ const bio = bioCollection[0]?.data;
 const baseUrl = getBaseUrl();
 const avatarPath = bio?.avatar?.replace(/^\//, "");
 const avatarSrc = avatarPath ? `${baseUrl}${avatarPath}` : undefined;
+const shortBioZh = bio?.shortBio_zh || '爱丁堡大学博士研究生，研究方向：计算磁学、拓扑自旋结构、二维范德瓦尔斯磁体。';
 ---
 
 <aside class="sidebar max-lg:flex-row max-lg:flex-wrap max-lg:gap-3 max-md:gap-2">
@@ -35,9 +36,10 @@ const avatarSrc = avatarPath ? `${baseUrl}${avatarPath}` : undefined;
                     {bio.institution}
                 </p>
             )}
-            {bio?.shortBio && (
-                <p class="sidebar-bio mt-2 max-md:hidden">{bio.shortBio}</p>
-            )}
+            <p class="sidebar-bio mt-2 max-md:hidden">
+                <span class="lang-en">{bio?.shortBio}</span>
+                <span class="lang-zh">{shortBioZh}</span>
+            </p>
             <div class="flex gap-1 flex-wrap items-center justify-center max-lg:justify-start mt-3">
                 {activeSocials.map((social) => (
                     <a

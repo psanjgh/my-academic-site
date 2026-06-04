@@ -1,0 +1,5 @@
+/* Bilingual content toggle — controlled by <html lang="..."> */
+html[lang="en"] .lang-zh,
+html:not([lang]) .lang-zh { display: none; }
+
+html[lang="zh-CN"] .lang-en { display: none; }

@@ -59,6 +59,7 @@ const bio = defineCollection({
         name: z.string(),
         avatar: z.string(),
         shortBio: z.string().optional(),
+        shortBio_zh: z.string().optional(),
         institution: z.string().optional(),
     }),
 });
@@ -84,6 +85,7 @@ const cv = defineCollection({
             institution: z.string(),
             period: z.string(),
             description: z.string(),
+            description_zh: z.string().optional(),
         })).optional(),
         education: z.array(z.object({
             degree: z.string(),
@@ -91,6 +93,7 @@ const cv = defineCollection({
             period: z.string(),
             thesis: z.string().optional(),
             description: z.string().optional(),
+            description_zh: z.string().optional(),
         })).optional(),
     }),
 });

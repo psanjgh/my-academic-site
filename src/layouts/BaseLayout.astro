@@ -14,6 +14,7 @@ import "@fontsource/jetbrains-mono/400.css";
 import "@fontsource/jetbrains-mono/500.css";
 import "katex/dist/katex.min.css";
 import "../styles/global.css";
+import "../styles/i18n.css";
 
 const { themeLight, themeDark } = resolveThemes(THEME_CONFIG);
 const themeVars = themeToCSSVars(themeLight, themeDark);
@@ -26,9 +27,9 @@ interface Props {
     robots?: "index, follow" | "noindex, nofollow";
 }
 
-const { 
-    title, 
-    description = SITE.desc, 
+const {
+    title,
+    description = SITE.desc,
     ogImage = SITE.ogImage,
     ogType = "website",
     robots = "index, follow"
@@ -42,7 +43,7 @@ const jsonLd = {
     "@type": "Person",
     name: SITE.author,
     url: SITE.website,
-    jobTitle: "Professor",
+    jobTitle: SITE.desc,
     description: SITE.desc,
 };
 ---
@@ -169,6 +170,20 @@ const jsonLd = {
                 localStorage.setItem("theme", theme);
             }
 
+            function getLocale() {
+                if (typeof localStorage !== "undefined" && localStorage.getItem("lang")) {
+                    return localStorage.getItem("lang");
+                }
+                if (typeof navigator !== "undefined" && navigator.language) {
+                    return navigator.language.startsWith("zh") ? "zh-CN" : "en";
+                }
+                return "en";
+            }
+
+            const currentLang = getLocale();
+            document.documentElement.setAttribute("lang", currentLang);
+            if (typeof localStorage !== "undefined") localStorage.setItem("lang", currentLang);
+
             setTheme();
             document.addEventListener("astro:after-swap", setTheme);
 
@@ -199,6 +214,25 @@ const jsonLd = {
             }
 
             document.addEventListener("astro:page-load", initToggle);
+
+            function initLangToggle() {
+                var btn = document.getElementById("lang-toggle");
+                if (btn) {
+                    btn.addEventListener("click", function() {
+                        var cur = document.documentElement.getAttribute("lang");
+                        var next = (cur === "zh-CN") ? "en" : "zh-CN";
+                        document.documentElement.setAttribute("lang", next);
+                        if (typeof localStorage !== "undefined") localStorage.setItem("lang", next);
+                    });
+                }
+            }
+
+            document.addEventListener("astro:after-swap", function() {
+                document.documentElement.setAttribute("lang", getLocale());
+            });
+
+            initLangToggle();
+            document.addEventListener("astro:page-load", initLangToggle);
         </script>
     </head>
     <body

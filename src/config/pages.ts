@@ -1,6 +1,13 @@
 import type { PagesConfig } from "../types";
 
-export const PAGES: PagesConfig = {
+// Bilingual page config (original fields stay in English, _zh suffix for Chinese)
+interface BilingualPageConfig {
+    title: string;
+    subtitle: string;
+    isActive: boolean;
+}
+
+const pages: Record<string, BilingualPageConfig> = {
     home: {
         title: "About Me",
         subtitle: "",
@@ -42,3 +49,15 @@ export const PAGES: PagesConfig = {
         isActive: true,
     },
 };
+
+// Chinese translations (kept separate so PagesConfig type stays unchanged)
+export const PAGES_ZH: Record<string, { title: string; subtitle: string }> = {
+    home: { title: "关于我", subtitle: "" },
+    publications: { title: "学术论文", subtitle: "同行评审研究论文与学术发表。" },
+    talks: { title: "学术报告与讲座", subtitle: "受邀报告、研讨会与学术会议演讲。" },
+    teaching: { title: "教学活动", subtitle: "课程教学与教育实践。" },
+    tags: { title: "标签", subtitle: "按主题浏览内容。" },
+    cv: { title: "个人简历", subtitle: "学术背景与职业经历。" },
+};
+
+export const PAGES: PagesConfig = pages;

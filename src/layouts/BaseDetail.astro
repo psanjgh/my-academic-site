@@ -17,9 +17,12 @@ interface Props {
 const { collection, id, readingTime } = Astro.props;
 const entry = (await getEntry(collection, id)) as any;
 
-const notFoundHref = `${toBaseHref("/")}404`.replace(/\/+404$/, "/404");
-
-if (!entry) return Astro.redirect(notFoundHref);
+if (!entry) {
+    return new Response(
+        `<!doctype html><html lang="en"><head><meta charset="UTF-8" /><title>404 - Not Found</title></head><body><h1>404 - Content Not Found</h1><p>The requested ${collection} entry "${id}" does not exist.</p><a href="${toBaseHref("/")}">Go back to Home</a></body></html>`,
+        { status: 404, headers: { "Content-Type": "text/html" } },
+    );
+}
 
 const { Content } = await render(entry);
 const detail = getDetailItem(entry, collection);

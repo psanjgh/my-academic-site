@@ -1,6 +1,6 @@
 ---
 import BaseListing from "../../layouts/BaseListing.astro";
-import { PAGES } from "../../config";
+import { PAGES, PAGES_ZH } from "../../config";
 
 if (PAGES.talks.isActive === false) {
     return Astro.redirect("/404");
@@ -8,7 +8,9 @@ if (PAGES.talks.isActive === false) {
 ---
 
 <BaseListing
+    collection="talks"
     title={PAGES.talks.title}
     subtitle={PAGES.talks.subtitle}
-    collection="talks"
+    titleZh={PAGES_ZH.talks?.title}
+    subtitleZh={PAGES_ZH.talks?.subtitle}
 />
