@@ -17,7 +17,7 @@ experience:
 education:
   - degree: "PhD in Condensed Matter Physics"
     institution: "University of Edinburgh"
-    period: "March 2023 - Present (Expected early 2027)"
+    period: "March 2023 - Present (Exp. early 2027)"
     thesis: "Multi-scale approach for spin dynamics on Two-Dimensional (2D) Magnetic Materials and Applications."
     description: "Supervised by Prof. Elton J. G. Santos. 6 peer-reviewed publications, 3 under review, 2 in preparation. Research on skyrmions, topological spin textures, and spin-orbit torque switching in 2D vdW magnets via atomistic (VAMPIRE) and micromagnetic (MUMAX3) simulations on HPC platforms (ARCHER2, Cirrus, DiRAC)."
   - degree: "Master (MSc) in Physics"
