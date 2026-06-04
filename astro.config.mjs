@@ -27,5 +27,7 @@ export default defineConfig({
   // Force static output
   output: 'static',
 
-  integrations: [sitemap()],
+  integrations: [sitemap({
+    filter: (page) => !page.includes('/dev-tools/'),
+  })],
 });
