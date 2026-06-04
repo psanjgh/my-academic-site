@@ -51,7 +51,7 @@ const jsonLd = {
 <html lang={SITE.lang}>
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/svg+xml" href={faviconHref} />
         <meta name="generator" content={Astro.generator} />
 
@@ -137,19 +137,13 @@ const jsonLd = {
                             window.gtag = function(){window.dataLayer.push(arguments);}
                             window.gtag('js', new Date());
                             window.gtag('config', ga4Id);
-
-                            document.addEventListener('astro:page-load', () => {
-                                window.gtag('config', ga4Id, {
-                                    page_path: window.location.pathname,
-                                });
-                            });
                         }
                     };
 
                     ['scroll', 'click', 'mousemove', 'touchstart', 'keydown'].forEach(event => {
                         window.addEventListener(event, loadAnalytics, { once: true, passive: true });
                     });
-                    setTimeout(loadAnalytics, 5000); // Fallback
+                    setTimeout(loadAnalytics, 5000);
                 </script>
             )
         }

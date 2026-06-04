@@ -831,7 +831,7 @@ a:hover,
 }
 
 .animate-in {
-    animation: fadeIn 0.5s ease-out forwards;
+    animation: fadeIn 0.15s ease-out forwards;
 }
 
 @keyframes fadeIn {

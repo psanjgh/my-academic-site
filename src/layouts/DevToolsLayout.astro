@@ -1,6 +1,5 @@
 ---
 import { SITE, THEME_CONFIG } from "../config";
-import { ClientRouter } from "astro:transitions";
 import { toBaseHref, resolveFaviconHref } from "../utils/url";
 import { resolveThemes, themeToCSSVars } from "../utils/theme";
 import "@fontsource/inter/400.css";
@@ -55,8 +54,6 @@ const faviconHref = resolveFaviconHref(SITE.favicon);
             }
         </style>
 
-        <ClientRouter />
-
         <script is:inline define:vars={{ allowDark: THEME_CONFIG.lightAndDark }}>
             function setTheme() {
                 const theme = (() => {
@@ -83,10 +80,9 @@ const faviconHref = resolveFaviconHref(SITE.favicon);
             }
 
             setTheme();
-            document.addEventListener("astro:after-swap", setTheme);
         </script>
     </head>
-    <body class="bg-background text-foreground transition-colors duration-300 min-h-screen p-10">
+    <body class="bg-background text-foreground min-h-screen p-10">
         <div class="max-w-[1600px] mx-auto">
             <header class="mb-12 flex justify-between items-end border-b border-border pb-8">
                 <div>
