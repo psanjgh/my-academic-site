@@ -172,6 +172,15 @@ const jsonLd = {
             setTheme();
             document.addEventListener("astro:after-swap", setTheme);
 
+            const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+            darkModeQuery.addEventListener("change", (e) => {
+                if (localStorage.getItem("theme-manual") !== "true") {
+                    const theme = e.matches ? "dark" : "light";
+                    document.documentElement.setAttribute("data-theme", theme);
+                    localStorage.setItem("theme", theme);
+                }
+            });
+
             function initToggle() {
                 const toggle = document.getElementById("theme-toggle");
                 if (toggle) {
@@ -184,6 +193,7 @@ const jsonLd = {
                             next,
                         );
                         localStorage.setItem("theme", next);
+                        localStorage.setItem("theme-manual", "true");
                     });
                 }
             }
