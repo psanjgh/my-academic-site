@@ -1,15 +1,14 @@
 ---
 import { SITE, SOCIALS, SOCIAL_ICONS } from "../../config";
 import { getCollection } from "astro:content";
+import { getBaseUrl } from "../../utils/url";
 import Icon from "../ui/Icon.astro";
 import { Image } from 'astro:assets';
 
 const activeSocials = SOCIALS.filter((s) => s.isActive);
 const bioCollection = await getCollection("bio");
 const bio = bioCollection[0]?.data;
-const baseUrl = import.meta.env.BASE_URL.endsWith("/")
-    ? import.meta.env.BASE_URL
-    : `${import.meta.env.BASE_URL}/`;
+const baseUrl = getBaseUrl();
 const avatarPath = bio?.avatar?.replace(/^\//, "");
 const avatarSrc = avatarPath ? `${baseUrl}${avatarPath}` : undefined;
 ---
@@ -20,9 +19,9 @@ const avatarSrc = avatarPath ? `${baseUrl}${avatarPath}` : undefined;
             <Image
                 src={avatarSrc}
                 alt={`Avatar of ${bio.name}`}
-                width={160} /* Maximum width in global.css for sidebar-avatar class */
+                width={160}
                 height={160}
-                densities={[1.5, 2]} 
+                densities={[1.5, 2]}
                 format="webp"
                 class="sidebar-avatar"
                 loading="eager"

@@ -100,6 +100,7 @@ All styles are defined in `@src/styles/global.css`. No inline `<style>` allowed 
 ### Theme System
 - Themes configured in `src/config/themes.ts` - unified THEMES object with `isDark` flag
 - Each theme defines 6 tokens: `background`, `foreground`, `accent`, `muted`, `border`, `surface`
+- Theme resolution is centralized in `src/utils/theme.ts` (`resolveThemes`, `themeToCSSVars`)
 - All CSS variables injected into `src/styles/global.css`
 - Users select active light/dark themes via `src/config/site.ts` (`THEME_CONFIG.themeLight`, `THEME_CONFIG.themeDark`)
 
@@ -170,25 +171,64 @@ All styles are defined in `@src/styles/global.css`. No inline `<style>` allowed 
 
 ```
 src/
+├── assets/
+│   └── icons.ts                  (SVG icon definitions)
 ├── components/
 │   ├── layout/
-│   │   ├── LeftSidebar.astro   (uses .sidebar, .sidebar-avatar, .sidebar-name, .social-link)
-│   │   ├── Navbar.astro        (uses .navbar, .nav-links, .nav-link, .btn-icon)
-│   │   ├── RightMain.astro     (uses .main-content, .main-body)
-│   │   └── Footer.astro        (uses .footer)
-│   ├── content/
-│   │   └── ContentLinks.astro
+│   │   ├── LeftSidebar.astro     (uses .sidebar, .sidebar-avatar, .sidebar-name, .social-link)
+│   │   ├── Navbar.astro          (uses .navbar, .nav-links, .nav-link)
+│   │   ├── RightMain.astro       (uses .main-content, .main-body)
+│   │   └── Footer.astro          (uses .footer, .btn-icon)
 │   └── ui/
-│       ├── BaseItemCard.astro  (uses .card, .card-title, .card-meta, .card-desc)
-│       ├── Tag.astro          (uses .tag)
-│       ├── BackLink.astro    (uses .back-link)
-│       ├── ShareButtons.astro (uses .icon-btn)
+│       ├── BaseItemCard.astro    (uses .card, .card-title, .card-meta, .card-desc)
+│       ├── Tag.astro             (uses .tag)
+│       ├── BackLink.astro        (uses .back-link)
+│       ├── ShareButtons.astro    (uses .icon-btn)
+│       ├── Timeline.astro
 │       └── Icon.astro
+├── config/
+│   ├── index.ts                  (barrel export)
+│   ├── site.ts                   (SITE, THEME_CONFIG, SETTINGS, ANALYTICS)
+│   ├── navigation.ts             (NAV_LINKS)
+│   ├── pages.ts                  (PAGES)
+│   ├── social.ts                 (SOCIALS, SOCIAL_ICONS)
+│   └── themes.ts                 (THEMES)
+├── content/
+│   ├── bio.md
+│   ├── cv.md
+│   ├── posts/                    (blog posts — .md files)
+│   ├── projects/                 (project entries — .md files)
+│   ├── publications/             (publication entries — .md files)
+│   ├── talks/                    (talk entries — .md files)
+│   └── teaching/                 (teaching entries — .md files)
 ├── layouts/
-│   ├── BaseLayout.astro
-│   ├── BaseDetail.astro       (uses .prose, .page-title, .card-meta)
-│   ├── BaseListing.astro      (uses .item-list, .page-header)
-│   └── DevToolsLayout.astro
-└── styles/
-    └── global.css             (all unified classes)
-```
+│   ├── BaseLayout.astro          (main layout: sidebar + main content)
+│   ├── BaseDetail.astro          (detail page layout)
+│   ├── BaseListing.astro         (listing page layout)
+│   └── DevToolsLayout.astro      (dev tools standalone layout)
+├── pages/
+│   ├── index.astro               (home / about)
+│   ├── 404.astro
+│   ├── rss.xml.ts
+│   ├── cv/index.astro
+│   ├── dev-tools/                (theme visualizers etc.)
+│   ├── posts/                    ([...page].astro, [id].astro)
+│   ├── projects/                 (index.astro, [id].astro)
+│   ├── publications/             (index.astro, [id].astro)
+│   ├── tags/                     (index.astro, [tag].astro)
+│   ├── talks/                    (index.astro, [id].astro)
+│   └── teaching/                 (index.astro, [id].astro)
+├── styles/
+│   └── global.css                (all unified CSS classes, theme variables, animations)
+├── types/
+│   ├── index.ts                  (barrel export)
+│   ├── config.ts                 (SiteConfig, NavLink, etc.)
+│   ├── content.ts                (Bio, CV, Publication, etc.)
+│   ├── display.ts                (ListingItem, DetailItem, etc.)
+│   └── themes.ts                 (Theme, ThemeColors)
+└── utils/
+    ├── adapters.ts               (getListingItem, getDetailItem)
+    ├── readingTime.ts            (getReadingTime)
+    ├── tags.ts                   (getAllTags, getContentByTag)
+    ├── theme.ts                  (resolveThemes, themeToCSSVars)
+    └── url.ts                    (getBaseUrl, toBaseHref, resolveFaviconHref)

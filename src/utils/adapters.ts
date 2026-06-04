@@ -7,7 +7,7 @@ function formatDate(dateValue: string | Date | undefined): string | undefined {
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
 }
 
-export function getListingItem(entry: any, collection?: string): ListingItem {
+export function getListingItem(entry: any): ListingItem {
     const d = entry.data;
     
     return {
@@ -23,7 +23,7 @@ export function getListingItem(entry: any, collection?: string): ListingItem {
 }
 
 export function getDetailItem(entry: any, collection: string): DetailItem {
-    const listing = getListingItem(entry, collection);
+    const listing = getListingItem(entry);
     
     return {
         ...listing,

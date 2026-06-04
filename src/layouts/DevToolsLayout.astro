@@ -1,6 +1,8 @@
 ---
-import { SITE, THEME_CONFIG, THEMES } from "../config";
+import { SITE, THEME_CONFIG } from "../config";
 import { ClientRouter } from "astro:transitions";
+import { toBaseHref, resolveFaviconHref } from "../utils/url";
+import { resolveThemes, themeToCSSVars } from "../utils/theme";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/600.css";
@@ -17,19 +19,9 @@ interface Props {
 
 const { title, description } = Astro.props;
 
-const themeLightKey = (THEME_CONFIG.themeLight.startsWith('light_') ? THEME_CONFIG.themeLight : `light_${THEME_CONFIG.themeLight}`) as keyof typeof THEMES;
-const themeDarkKey = (THEME_CONFIG.themeDark.startsWith('dark_') ? THEME_CONFIG.themeDark : `dark_${THEME_CONFIG.themeDark}`) as keyof typeof THEMES;
-
-const themeLight = THEMES[themeLightKey] || THEMES.light_default;
-const themeDark = THEMES[themeDarkKey] || THEMES.dark_default;
-const baseUrl = import.meta.env.BASE_URL.endsWith("/")
-    ? import.meta.env.BASE_URL
-    : `${import.meta.env.BASE_URL}/`;
-const basePath = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
-const toBaseHref = (href: string) => (href === "/" ? baseUrl : `${basePath}${href}`);
-const faviconHref = SITE.favicon.startsWith("http")
-    ? SITE.favicon
-    : `${baseUrl}${SITE.favicon.replace(/^\//, "")}`;
+const { themeLight, themeDark } = resolveThemes(THEME_CONFIG);
+const themeVars = themeToCSSVars(themeLight, themeDark);
+const faviconHref = resolveFaviconHref(SITE.favicon);
 ---
 
 <!doctype html>
@@ -42,24 +34,7 @@ const faviconHref = SITE.favicon.startsWith("http")
         <meta name="description" content={description || "Development internal tools."} />
         <meta name="robots" content="noindex, nofollow" />
 
-        <style
-            is:global
-            define:vars={{
-                lightBg: themeLight.background,
-                lightFg: themeLight.foreground,
-                lightAccent: themeLight.accent,
-                lightMuted: themeLight.muted,
-                lightBorder: themeLight.border,
-                lightSurface: themeLight.surface,
-
-                darkBg: themeDark.background,
-                darkFg: themeDark.foreground,
-                darkAccent: themeDark.accent,
-                darkMuted: themeDark.muted,
-                darkBorder: themeDark.border,
-                darkSurface: themeDark.surface,
-            }}
-        >
+        <style is:global define:vars={themeVars}>
             :root {
                 --background: var(--lightBg);
                 --foreground: var(--lightFg);

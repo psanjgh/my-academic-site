@@ -18,13 +18,13 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   
-  // 站点信息
+  // Site URL
   site: 'https://peiyucai.com', 
   
-  // 根路径
+  // Base path (use '/' for root)
   base: '/', 
   
-  // 强制静态输出
+  // Force static output
   output: 'static',
 
   integrations: [sitemap()],

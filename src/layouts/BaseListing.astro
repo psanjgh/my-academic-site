@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BaseItemCard from "../components/ui/BaseItemCard.astro";
 import { getListingItem } from "../utils/adapters";
+import { toBaseHref } from "../utils/url";
 
 interface Props {
     collection: "publications" | "talks" | "projects" | "posts" | "teaching" | "all";
@@ -22,11 +23,6 @@ const sortedEntries = entries.sort((a: any, b: any) => {
     const dateB = b.data.date ? new Date(b.data.date).getTime() : 0;
     return dateB - dateA;
 });
-const baseUrl = import.meta.env.BASE_URL.endsWith("/")
-    ? import.meta.env.BASE_URL
-    : `${import.meta.env.BASE_URL}/`;
-const basePath = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
-const toBaseHref = (href: string) => (href === "/" ? baseUrl : `${basePath}${href}`);
 ---
 
 <BaseLayout title={title}>

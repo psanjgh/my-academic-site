@@ -1,15 +1,12 @@
 ---
 import { SITE, THEME_CONFIG, SETTINGS } from "../../config";
+import { toBaseHref } from "../../utils/url";
 import Icon from "../ui/Icon.astro";
 
 const currentYear = new Date().getFullYear();
 const showToggle = THEME_CONFIG.lightAndDark;
+const showRSS = SETTINGS.showRSSInFooter;
 const showDevTools = import.meta.env.DEV || SETTINGS.addDevToolsInProduction;
-const baseUrl = import.meta.env.BASE_URL.endsWith("/")
-    ? import.meta.env.BASE_URL
-    : `${import.meta.env.BASE_URL}/`;
-const basePath = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
-const toBaseHref = (href: string) => (href === "/" ? baseUrl : `${basePath}${href}`);
 ---
 
 <footer class="footer">
@@ -25,16 +22,20 @@ const toBaseHref = (href: string) => (href === "/" ? baseUrl : `${basePath}${hre
                 class="link">Academic Portfolio Astro</a
             ></span
         >
-        <a
-            href={toBaseHref("/rss.xml")}
-            aria-label="RSS Feed"
-            title="RSS Feed"
-            target="_blank"
-            rel="noreferrer"
-            class="btn-icon"
-        >
-            <Icon name="RSS" size={16} />
-        </a>
+        {
+            showRSS && (
+                <a
+                    href={toBaseHref("/rss.xml")}
+                    aria-label="RSS Feed"
+                    title="RSS Feed"
+                    target="_blank"
+                    rel="noreferrer"
+                    class="btn-icon"
+                >
+                    <Icon name="RSS" size={16} />
+                </a>
+            )
+        }
         {
             showToggle && (
                 <button
