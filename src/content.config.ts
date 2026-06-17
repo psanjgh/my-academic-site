@@ -98,8 +98,10 @@ const cv = defineCollection({
         awards: z.array(z.object({
             title: z.string(),
             from: z.string(),
+            from_zh: z.string().optional(),
             year: z.string(),
             detail: z.string(),
+            detail_zh: z.string().optional(),
         })).optional(),
         conferences: z.array(z.object({
             type: z.string(),

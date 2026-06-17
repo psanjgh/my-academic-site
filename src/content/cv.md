@@ -43,16 +43,22 @@ education:
 awards:
   - title: "Conference Travel Support"
     from: "Magnetism and Magnetic Materials (MMM) 2026 Conference"
+    from_zh: "磁学与磁性材料（MMM）2026 会议"
     year: "2026"
     detail: "$1,000"
+    detail_zh: "1,000 美元"
   - title: "PhD Scholarship"
     from: "China Scholarship Council (CSC)"
+    from_zh: "国家留学基金委（CSC）"
     year: "2022"
     detail: "Full tuition waiver and comprehensive monthly living stipend"
+    detail_zh: "全额学费减免及每月生活津贴"
   - title: "Dean's List"
     from: "University of Central Florida"
+    from_zh: "中佛罗里达大学"
     year: "2018–2021"
     detail: "Awarded 6 times (Spring 2018, Fall 2018, Spring 2019, Fall 2019, Spring 2020, Spring 2021)"
+    detail_zh: "6 次入选（2018 年春 – 2021 年春）"
 ---
 
 <div class="lang-en">

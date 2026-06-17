@@ -30,6 +30,9 @@ const titleZhMap: Record<string, string> = {
     "PhD in Physics": "物理学博士",
     "Master (MSc) in Physics": "物理学硕士 (MSc)",
     "Bachelor of Science in Physics and Mathematics": "物理与数学双学士",
+    "Conference Travel Support": "会议差旅资助",
+    "PhD Scholarship": "博士奖学金",
+    "Dean's List": "院长嘉许名单",
 };
 
 const instZhMap: Record<string, string> = {
@@ -122,10 +125,10 @@ function iz(en: string): string { return instZhMap[en] || en; }
                 <section class="section">
                     <h2 class="section-title border-b border-border pb-2">奖学金与荣誉</h2>
                     <Timeline items={awards.map(a => ({
-                        title: a.title,
-                        subtitle: a.from,
+                        title: tz(a.title),
+                        subtitle: (a as any).from_zh || a.from,
                         period: a.year,
-                        description: a.detail,
+                        description: (a as any).detail_zh || a.detail,
                     }))} />
                 </section>
             )}
