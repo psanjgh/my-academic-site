@@ -59,7 +59,7 @@ const ogImage = entry.data.image || SITE.ogImage;
                 {meta.map((m: any) => (
                     <span class="flex items-center gap-1">
                         <Icon name={m.icon} size={14} />
-                        <span>{m.value}</span>
+                        <span set:html={m.value} />
                     </span>
                 ))}
             </div>

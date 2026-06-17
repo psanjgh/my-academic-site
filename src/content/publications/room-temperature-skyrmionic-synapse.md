@@ -1,6 +1,6 @@
 ---
 title: "Room-Temperature Skyrmionic Synapse in 2D Ferromagnet Fe3GaTe2 Operating via Collective Spin Texture Transformation"
-author: "Jixiang Huang; Tongji Zhu; PeiYu Cai; Xiaoming Ma; Zhen Wang; Ruifu Zhang; Yi Hao; Jingdi Lu; Liubing He; Jun Xu; Yuejie Zhang; Wanjun Jiang; Jing Tao; Shiming Lei; Pavel Parchinskiy; Lingfei Wang; Wei Niu; Elton J. G. Santos; Xiaoqian Zhang; Peng Li"
+author: "Jixiang Huang†; Tongji Zhu†; PeiYu Cai†; Xiaoming Ma†; Zhen Wang†; Ruifu Zhang; Yi Hao; Jingdi Lu; Liubing He; Jun Xu; Yuejie Zhang; Wanjun Jiang; Jing Tao; Shiming Lei; Pavel Parchinskiy; Lingfei Wang; Wei Niu; Elton J. G. Santos; Xiaoqian Zhang; Peng Li"
 date: "2026-05-14"
 journal: "Advanced Materials e20288 (2026)"
 external_url: "https://doi.org/10.1002/adma.202520288"

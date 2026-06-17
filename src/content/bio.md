@@ -1,7 +1,8 @@
 ---
 name: "PeiYu Cai"
 avatar: "images/peiyu.jpg"
-shortBio: "PhD Candidate in Condensed Matter Physics specializing in computational magnetism, topological spin textures, and 2D magnetic materials."
+shortBio: "PhD Candidate in Physics | Computational Magnetism & Spintronics"
+shortBio_zh: "爱丁堡大学物理学博士研究生 | 计算磁学与自旋电子学"
 institution: "University of Edinburgh, UK"
 ---
 

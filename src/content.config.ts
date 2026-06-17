@@ -95,6 +95,19 @@ const cv = defineCollection({
             description: z.string().optional(),
             description_zh: z.string().optional(),
         })).optional(),
+        awards: z.array(z.object({
+            title: z.string(),
+            from: z.string(),
+            year: z.string(),
+            detail: z.string(),
+        })).optional(),
+        conferences: z.array(z.object({
+            type: z.string(),
+            title: z.string(),
+            event: z.string(),
+            date: z.string(),
+            abstract: z.string().optional(),
+        })).optional(),
     }),
 });
 

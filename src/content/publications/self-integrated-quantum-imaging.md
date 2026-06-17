@@ -1,8 +1,9 @@
 ---
 title: "Self-Integrated Quantum Imaging of an All-van der Waals Spin-Orbit Torque System"
 author: "Xi Zhang; Jingcheng Zhou; Chaowei Hu; PeiYu Cai; Kuangyin Deng; Chuangtang Wang; Nishkarsh Agarwal; Hanshang Jin; Faris A. Al-Matouq; Stelo Xu; Roshan S. Trivedi; Senlei Li; Sumedh Rathi; Hanyi Lu; Zhigang Jiang; Valentin Taufour; Robert Hovden; Liuyan Zhao; Ran Cheng; Xiaodong Xu; Elton J. G. Santos; Jiun-Haw Chu; Chunhui Rita Du; Hailong Wang"
-date: "2026-01-01"
-journal: "Nature Communications (accepted)"
+date: "2026-06-10"
+journal: "Nature Communications (2026)"
+external_url: "https://doi.org/10.1038/s41467-026-74178-7"
 description: "Disentangled field-like and damping-like torque contributions in deterministic SOT switching, clarifying the SOT/STT interplay in the Fe3GaTe2/hBN heterostructure."
 tags:
   - "Spin-Orbit Torque"

@@ -1,6 +1,6 @@
 ---
 title: "Wave Functions for High-Symmetry, Two-Dimensional Microstrip Antennas and Boxes"
-author: "Joseph R. Rain; PeiYu Cai; Alexander Baekey; Matthew A. Reinhard; Roman I. Vasquez; Andrew C. Silverman; Christopher L. Cain; Richard A. Klemm"
+author: "Joseph R. Rain†; PeiYu Cai†; Alexander Baekey†; Matthew A. Reinhard; Roman I. Vasquez; Andrew C. Silverman; Christopher L. Cain; Richard A. Klemm"
 date: "2021-12-01"
 journal: "Physical Review A 104, 062205"
 external_url: "https://doi.org/10.1103/PhysRevA.104.062205"
